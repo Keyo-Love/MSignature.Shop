@@ -542,16 +542,37 @@ Seasonal Collection
 
 <!-- OWNER BUTTONS -->
 
-<div class="owner-panel">
+<div
+class="owner-panel"
+id="ownerPanel"
+style="display:none;">
 
-<button class="owner-btn" onclick="openProductModal()">
+<button class="owner-btn"
+onclick="openProductModal()">
 ➕ Add Product
 </button>
 
-<button class="owner-btn" onclick="openHeroModal()">
+<button class="owner-btn"
+onclick="openHeroModal()">
 🖼 Hero Manager
 </button>
 
+</div>
+
+<!-- HIDDEN ADMIN BUTTON -->
+
+<div
+onclick="unlockAdmin()"
+style="
+position:fixed;
+bottom:10px;
+left:10px;
+width:18px;
+height:18px;
+opacity:0;
+cursor:pointer;
+z-index:9999;
+">
 </div>
 
 <!-- PRODUCT MODAL -->
@@ -670,9 +691,19 @@ Close
 
 <script>
 
+  <script>
+
 let uploadedImage = "";
 let heroImageData = localStorage.getItem("mSignatureHeroImage") || "";
 let editIndex = null;
+
+/* ADMIN MODE */
+
+let adminMode = false;
+
+const ADMIN_PASSWORD = "MSignatureAdmin";
+
+/* PRODUCTS */
 
 let products =
 JSON.parse(localStorage.getItem("mSignatureProducts")) || [
@@ -703,7 +734,36 @@ JSON.stringify(products)
 
 }
 
-/* RENDER */
+/* ADMIN TOGGLE */
+
+function unlockAdmin(){
+
+const password = prompt(
+"Enter Admin Password"
+);
+
+if(password === ADMIN_PASSWORD){
+
+adminMode = true;
+
+document.getElementById(
+"ownerPanel"
+).style.display = "flex";
+
+renderProducts();
+
+alert("Admin Mode Enabled");
+
+}
+else{
+
+alert("Incorrect Password");
+
+}
+
+}
+
+/* RENDER PRODUCTS */
 
 function renderProducts(){
 
@@ -809,6 +869,8 @@ $${product.price}
 
 <div class="actions">
 
+${adminMode ? `
+
 <button class="btn edit"
 onclick="editProduct(${index})">
 Edit
@@ -823,6 +885,8 @@ Archive
 onclick="deleteProduct(${index})">
 Delete
 </button>
+
+` : ``}
 
 </div>
 
@@ -1289,6 +1353,8 @@ document.body.classList.toggle("dark");
 renderProducts();
 
 loadHero();
+
+</script>
 
 </script>
 
