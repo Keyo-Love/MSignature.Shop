@@ -1,60 +1,196 @@
-<!--
-M SIGNATURE — REFINED BOUTIQUE STOREFRONT UPDATE
-FULL REPLACEMENT VERSION
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-MAJOR REFINEMENTS:
-✔ Better image fitting (no aggressive cropping)
-✔ Softer boutique product cards
-✔ Refined bag categories
-✔ Process labels separated from categories
-✔ Seasonal Collection toggle system
-✔ Improved storefront hierarchy
-✔ Cleaner inventory labels
-✔ Better product spacing
-✔ Boutique-style product framing
--->
+<title>M Signature</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+:root{
+--bg:#f6f6f6;
+--card:#ffffff;
+--text:#1f1f1f;
+--sub:#777;
+--soft:#efefef;
+--shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+body.dark{
+--bg:#121212;
+--card:#1e1e1e;
+--text:#f2f2f2;
+--sub:#b3b3b3;
+--soft:#2b2b2b;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:var(--text);
+transition:.3s;
+overflow-x:hidden;
+}
+
+.container{
+width:min(1450px,92%);
+margin:auto;
+padding:35px 0 80px;
+}
+
+/* HEADER */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:35px;
+}
+
+.logo-wrap{
+text-align:center;
+flex:1;
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:5rem;
+font-weight:600;
+}
+
+.subtitle{
+letter-spacing:5px;
+text-transform:uppercase;
+font-size:.9rem;
+margin-top:6px;
+color:var(--sub);
+}
+
+.header-actions{
+display:flex;
+gap:10px;
+}
+
+.icon-btn{
+border:none;
+background:var(--card);
+padding:14px 18px;
+border-radius:50px;
+cursor:pointer;
+box-shadow:var(--shadow);
+}
+
+/* HERO */
+
+.hero{
+height:460px;
+border-radius:30px;
+overflow:hidden;
+position:relative;
+box-shadow:var(--shadow);
+margin-bottom:50px;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.hero-overlay h2{
+font-family:'Cormorant Garamond',serif;
+font-size:4rem;
+color:white;
+margin-bottom:15px;
+}
+
+.hero-overlay p{
+max-width:700px;
+line-height:1.8;
+color:#f3f3f3;
+}
+
+/* FILTERS */
+
+.filter-bar{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-bottom:35px;
+}
+
+.filter-bar select{
+padding:15px 18px;
+border:none;
+border-radius:18px;
+background:var(--card);
+box-shadow:var(--shadow);
+font-family:inherit;
+color:var(--text);
+min-width:200px;
+}
+
+/* PRODUCTS */
 
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:32px;
-margin-top:50px;
 }
 
 .card{
 background:var(--card);
-border-radius:30px;
+border-radius:28px;
 overflow:hidden;
 box-shadow:var(--shadow);
 transition:.28s;
-border:1px solid rgba(0,0,0,.04);
 }
 
 .card:hover{
-transform:translateY(-10px);
+transform:translateY(-8px);
 }
 
 .card-image{
 height:360px;
-position:relative;
-overflow:hidden;
 background:#f5f5f5;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:24px;
+padding:22px;
+position:relative;
 }
 
 .card-image img{
 width:100%;
 height:100%;
 object-fit:contain;
-transition:.35s;
+transition:.3s;
 }
 
-.card:hover .card-image img{
+.card:hover img{
 transform:scale(1.03);
 }
 
@@ -62,12 +198,11 @@ transform:scale(1.03);
 position:absolute;
 top:16px;
 left:16px;
-background:rgba(255,255,255,.94);
+background:rgba(255,255,255,.95);
 padding:8px 14px;
 border-radius:30px;
-font-size:13px;
+font-size:12px;
 font-weight:600;
-backdrop-filter:blur(8px);
 }
 
 .seasonal-badge{
@@ -75,7 +210,7 @@ position:absolute;
 top:16px;
 right:16px;
 background:#fff3dc;
-color:#8a5b00;
+color:#7a5400;
 padding:8px 14px;
 border-radius:30px;
 font-size:12px;
@@ -89,7 +224,7 @@ padding:24px;
 .title{
 font-size:1.45rem;
 font-weight:600;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .desc{
@@ -100,8 +235,8 @@ margin-bottom:20px;
 
 .tags{
 display:flex;
-flex-wrap:wrap;
 gap:10px;
+flex-wrap:wrap;
 margin-bottom:20px;
 }
 
@@ -110,15 +245,13 @@ padding:9px 14px;
 border-radius:30px;
 background:var(--soft);
 font-size:12px;
-font-weight:500;
 }
 
 .bottom{
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:15px;
-margin-top:10px;
+gap:12px;
 }
 
 .price{
@@ -145,62 +278,70 @@ transition:.2s;
 transform:translateY(-2px);
 }
 
-.add{
-background:var(--soft);
-color:var(--text);
-}
-
 .edit{
-background:#e7e7e7;
+background:#e5e5e5;
 }
 
 .delete{
-background:#ffe3e3;
+background:#ffe1e1;
 color:#7a0000;
 }
 
 .archive{
-background:#ece4ff;
-color:#5d2c9c;
+background:#ede5ff;
+color:#6033a3;
 }
 
-/* COLLECTION HEADERS */
+/* OWNER BUTTONS */
 
-.collection-title{
+.owner-panel{
+position:fixed;
+bottom:25px;
+right:25px;
+display:flex;
+flex-direction:column;
+gap:12px;
+z-index:999;
+}
+
+.owner-btn{
+border:none;
+background:#1f1f1f;
+color:white;
+padding:16px 22px;
+border-radius:50px;
+cursor:pointer;
+box-shadow:var(--shadow);
+}
+
+/* MODALS */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.5);
+display:none;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:9999;
+overflow-y:auto;
+}
+
+.modal-box{
+background:var(--card);
+padding:35px;
+border-radius:30px;
+width:min(750px,100%);
+max-height:90vh;
+overflow-y:auto;
+}
+
+.modal-box h2{
 font-family:'Cormorant Garamond',serif;
 font-size:3rem;
-margin-top:60px;
-margin-bottom:12px;
-}
-
-.collection-sub{
-color:var(--sub);
 margin-bottom:20px;
-line-height:1.8;
 }
-
-/* FILTER BAR */
-
-.filter-bar{
-display:flex;
-flex-wrap:wrap;
-gap:14px;
-margin-top:35px;
-margin-bottom:25px;
-}
-
-.filter-bar select{
-padding:14px 18px;
-border:none;
-border-radius:18px;
-background:var(--card);
-box-shadow:var(--shadow);
-font-family:inherit;
-color:var(--text);
-min-width:200px;
-}
-
-/* PRODUCT MANAGER */
 
 .form-grid{
 display:grid;
@@ -225,60 +366,203 @@ height:120px;
 resize:none;
 }
 
+.preview-image{
+margin-top:20px;
+width:220px;
+height:220px;
+object-fit:contain;
+background:#f5f5f5;
+padding:12px;
+border-radius:20px;
+display:none;
+}
+
+.modal-actions{
+display:flex;
+gap:14px;
+margin-top:25px;
+flex-wrap:wrap;
+}
+
+.close-btn{
+background:var(--soft);
+}
+
+/* FOOTER */
+
+footer{
+margin-top:80px;
+text-align:center;
+color:var(--sub);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.logo{
+font-size:3rem;
+}
+
+.hero{
+height:340px;
+}
+
+.hero-overlay h2{
+font-size:2.5rem;
+}
+
+.topbar{
+flex-direction:column;
+}
+
+}
+
 </style>
+</head>
 
-<!-- COLLECTION SECTION -->
+<body>
 
-<section>
+<div class="container">
 
-<h2 class="collection-title">
-Signature Collections
-</h2>
+<div class="topbar">
 
-<p class="collection-sub">
-Explore handcrafted crochet bags thoughtfully designed with warmth,
-individuality, and elegant everyday styling.
+<div style="width:120px;"></div>
+
+<div class="logo-wrap">
+
+<h1 class="logo">
+M Signature
+</h1>
+
+<p class="subtitle">
+Handmade Bags & Accessories
 </p>
 
-<div class="filter-bar">
+</div>
 
-<select id="filterCategory">
+<div class="header-actions">
 
-<option>All Categories</option>
+<button class="icon-btn" onclick="toggleTheme()">
+✨
+</button>
 
-<option>Tote Bag</option>
+</div>
 
-<option>Handbag</option>
+</div>
 
-<option>Cross-Functional Bag</option>
+<!-- HERO -->
 
-<option>Shoulder Bag</option>
+<section class="hero">
 
-</select>
+<img id="heroImage"
+src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1600&auto=format&fit=crop">
 
-<select id="filterProcess">
+<div class="hero-overlay">
 
-<option>All Processes</option>
+<h2 id="heroTitle">
+Handmade With Care
+</h2>
 
-<option>Ready to Ship</option>
-
-<option>Made to Order</option>
-
-</select>
-
-<select id="filterSeasonal">
-
-<option>All Products</option>
-
-<option>Seasonal Collection</option>
-
-</select>
+<p id="heroSubtitle">
+Beautiful crochet bags and accessories thoughtfully designed with warmth and creativity.
+</p>
 
 </div>
 
 </section>
 
-<!-- PRODUCT MODAL UPDATE -->
+<!-- FILTERS -->
+
+<div class="filter-bar">
+
+<select id="filterCategory">
+
+<option value="All">
+All Categories
+</option>
+
+<option value="Tote Bag">
+Tote Bag
+</option>
+
+<option value="Handbag">
+Handbag
+</option>
+
+<option value="Cross-Functional Bag">
+Cross-Functional Bag
+</option>
+
+<option value="Shoulder Bag">
+Shoulder Bag
+</option>
+
+</select>
+
+<select id="filterProcess">
+
+<option value="All">
+All Processes
+</option>
+
+<option value="Ready to Ship">
+Ready to Ship
+</option>
+
+<option value="Made to Order">
+Made to Order
+</option>
+
+</select>
+
+<select id="filterSeasonal">
+
+<option value="All">
+All Products
+</option>
+
+<option value="Seasonal Collection">
+Seasonal Collection
+</option>
+
+</select>
+
+</div>
+
+<!-- PRODUCTS -->
+
+<section class="products" id="products"></section>
+
+<footer>
+© 2026 M Signature • Handmade With Care
+</footer>
+
+</div>
+
+<!-- OWNER BUTTONS -->
+
+<div class="owner-panel">
+
+<button class="owner-btn" onclick="openProductModal()">
+➕ Add Product
+</button>
+
+<button class="owner-btn" onclick="openHeroModal()">
+🖼 Hero Manager
+</button>
+
+</div>
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="productModal">
+
+<div class="modal-box">
+
+<h2 id="productModalTitle">
+Add Product
+</h2>
 
 <div class="form-grid">
 
@@ -328,7 +612,146 @@ individuality, and elegant everyday styling.
 
 </div>
 
-<!-- PRODUCT CARD RENDER UPDATE -->
+<img id="previewImage" class="preview-image">
+
+<div class="modal-actions">
+
+<button class="btn" onclick="saveProduct()">
+Save Product
+</button>
+
+<button class="btn close-btn" onclick="closeProductModal()">
+Close
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- HERO MODAL -->
+
+<div class="modal" id="heroModal">
+
+<div class="modal-box">
+
+<h2>
+Hero Banner Manager
+</h2>
+
+<div class="form-grid">
+
+<input id="heroTitleInput" placeholder="Hero Title">
+
+<textarea id="heroSubtitleInput" placeholder="Hero Subtitle"></textarea>
+
+<input type="file" id="heroUpload" accept="image/*">
+
+</div>
+
+<img id="heroPreview" class="preview-image">
+
+<div class="modal-actions">
+
+<button class="btn" onclick="saveHeroChanges()">
+Save Hero Changes
+</button>
+
+<button class="btn close-btn" onclick="closeHeroModal()">
+Close
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let uploadedImage = "";
+let heroImageData = localStorage.getItem("mSignatureHeroImage") || "";
+let editIndex = null;
+
+let products =
+JSON.parse(localStorage.getItem("mSignatureProducts")) || [
+
+{
+name:"Midnight Tote",
+type:"Tote Bag",
+color:"Black",
+size:"Large",
+price:85,
+inventory:2,
+status:"Made to Order",
+seasonal:"No Seasonal Collection",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop",
+description:"Elegant handmade crochet tote with detailed stitching."
+}
+
+];
+
+/* SAVE */
+
+function saveStorage(){
+
+localStorage.setItem(
+"mSignatureProducts",
+JSON.stringify(products)
+);
+
+}
+
+/* RENDER */
+
+function renderProducts(){
+
+const container =
+document.getElementById("products");
+
+container.innerHTML = "";
+
+const categoryFilter =
+document.getElementById("filterCategory").value;
+
+const processFilter =
+document.getElementById("filterProcess").value;
+
+const seasonalFilter =
+document.getElementById("filterSeasonal").value;
+
+products.forEach((product,index)=>{
+
+if(
+(categoryFilter !== "All" && product.type !== categoryFilter)
+||
+(processFilter !== "All" && product.status !== processFilter)
+||
+(seasonalFilter !== "All"
+&& product.seasonal !== seasonalFilter)
+){
+return;
+}
+
+let inventoryLabel =
+`Inventory: ${product.inventory}`;
+
+if(Number(product.inventory) <= 2
+&& Number(product.inventory) > 0){
+
+inventoryLabel =
+`⚠ Low Stock: ${product.inventory}`;
+
+}
+
+if(Number(product.inventory) <= 0){
+
+inventoryLabel = "Sold Out";
+
+}
+
+container.innerHTML += `
 
 <div class="card">
 
@@ -341,7 +764,9 @@ ${product.status}
 </div>
 
 ${product.seasonal === "Seasonal Collection"
-? `<div class="seasonal-badge">Seasonal</div>`
+? `<div class="seasonal-badge">
+Seasonal
+</div>`
 : ""}
 
 </div>
@@ -371,7 +796,7 @@ ${product.size}
 </div>
 
 <div class="tag">
-Inventory: ${product.inventory}
+${inventoryLabel}
 </div>
 
 </div>
@@ -384,15 +809,18 @@ $${product.price}
 
 <div class="actions">
 
-<button class="btn edit" onclick="editProduct(${index})">
+<button class="btn edit"
+onclick="editProduct(${index})">
 Edit
 </button>
 
-<button class="btn archive" onclick="archiveProduct(${index})">
+<button class="btn archive"
+onclick="archiveProduct(${index})">
 Archive
 </button>
 
-<button class="btn delete" onclick="deleteProduct(${index})">
+<button class="btn delete"
+onclick="deleteProduct(${index})">
 Delete
 </button>
 
@@ -403,3 +831,466 @@ Delete
 </div>
 
 </div>
+
+`;
+
+});
+
+saveStorage();
+
+}
+
+/* FILTERS */
+
+document.getElementById("filterCategory")
+.addEventListener("change",renderProducts);
+
+document.getElementById("filterProcess")
+.addEventListener("change",renderProducts);
+
+document.getElementById("filterSeasonal")
+.addEventListener("change",renderProducts);
+
+/* IMAGE UPLOAD */
+
+document.getElementById("imageUpload")
+.addEventListener("change",function(event){
+
+const file = event.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+uploadedImage = e.target.result;
+
+const preview =
+document.getElementById("previewImage");
+
+preview.src = uploadedImage;
+
+preview.style.display = "block";
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+/* HERO UPLOAD */
+
+document.getElementById("heroUpload")
+.addEventListener("change",function(event){
+
+const file = event.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+heroImageData = e.target.result;
+
+const preview =
+document.getElementById("heroPreview");
+
+preview.src = heroImageData;
+
+preview.style.display = "block";
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+/* PRODUCT MODAL */
+
+function openProductModal(){
+
+editIndex = null;
+
+document.getElementById(
+"productModalTitle"
+).innerText = "Add Product";
+
+clearForm();
+
+document.getElementById(
+"productModal"
+).style.display = "flex";
+
+}
+
+function closeProductModal(){
+
+document.getElementById(
+"productModal"
+).style.display = "none";
+
+}
+
+/* HERO MODAL */
+
+function openHeroModal(){
+
+document.getElementById(
+"heroTitleInput"
+).value =
+document.getElementById(
+"heroTitle"
+).innerText;
+
+document.getElementById(
+"heroSubtitleInput"
+).value =
+document.getElementById(
+"heroSubtitle"
+).innerText;
+
+if(heroImageData){
+
+const preview =
+document.getElementById("heroPreview");
+
+preview.src = heroImageData;
+
+preview.style.display = "block";
+
+}
+
+document.getElementById(
+"heroModal"
+).style.display = "flex";
+
+}
+
+function closeHeroModal(){
+
+document.getElementById(
+"heroModal"
+).style.display = "none";
+
+}
+
+/* SAVE HERO */
+
+function saveHeroChanges(){
+
+const title =
+document.getElementById(
+"heroTitleInput"
+).value;
+
+const subtitle =
+document.getElementById(
+"heroSubtitleInput"
+).value;
+
+document.getElementById(
+"heroTitle"
+).innerText = title;
+
+document.getElementById(
+"heroSubtitle"
+).innerText = subtitle;
+
+if(heroImageData){
+
+document.getElementById(
+"heroImage"
+).src = heroImageData;
+
+localStorage.setItem(
+"mSignatureHeroImage",
+heroImageData
+);
+
+}
+
+localStorage.setItem(
+"mSignatureHeroTitle",
+title
+);
+
+localStorage.setItem(
+"mSignatureHeroSubtitle",
+subtitle
+);
+
+alert("Hero updated!");
+
+closeHeroModal();
+
+}
+
+/* LOAD HERO */
+
+function loadHero(){
+
+const savedTitle =
+localStorage.getItem(
+"mSignatureHeroTitle"
+);
+
+const savedSubtitle =
+localStorage.getItem(
+"mSignatureHeroSubtitle"
+);
+
+if(savedTitle){
+
+document.getElementById(
+"heroTitle"
+).innerText = savedTitle;
+
+}
+
+if(savedSubtitle){
+
+document.getElementById(
+"heroSubtitle"
+).innerText = savedSubtitle;
+
+}
+
+if(heroImageData){
+
+document.getElementById(
+"heroImage"
+).src = heroImageData;
+
+}
+
+}
+
+/* SAVE PRODUCT */
+
+function saveProduct(){
+
+const productData = {
+
+name:
+document.getElementById(
+"productName"
+).value,
+
+type:
+document.getElementById(
+"productType"
+).value,
+
+color:
+document.getElementById(
+"productColor"
+).value,
+
+size:
+document.getElementById(
+"productSize"
+).value,
+
+price:
+document.getElementById(
+"productPrice"
+).value,
+
+inventory:
+document.getElementById(
+"inventoryCount"
+).value,
+
+status:
+document.getElementById(
+"productStatus"
+).value,
+
+seasonal:
+document.getElementById(
+"seasonalToggle"
+).value,
+
+image:
+uploadedImage
+|| "https://via.placeholder.com/500",
+
+description:
+document.getElementById(
+"productDescription"
+).value
+
+};
+
+if(editIndex !== null){
+
+products[editIndex] = productData;
+
+}
+else{
+
+products.push(productData);
+
+}
+
+saveStorage();
+
+renderProducts();
+
+closeProductModal();
+
+}
+
+/* EDIT */
+
+function editProduct(index){
+
+editIndex = index;
+
+const product = products[index];
+
+document.getElementById(
+"productModalTitle"
+).innerText = "Edit Product";
+
+document.getElementById(
+"productName"
+).value = product.name;
+
+document.getElementById(
+"productType"
+).value = product.type;
+
+document.getElementById(
+"productColor"
+).value = product.color;
+
+document.getElementById(
+"productSize"
+).value = product.size;
+
+document.getElementById(
+"productPrice"
+).value = product.price;
+
+document.getElementById(
+"inventoryCount"
+).value = product.inventory;
+
+document.getElementById(
+"productStatus"
+).value = product.status;
+
+document.getElementById(
+"seasonalToggle"
+).value = product.seasonal;
+
+document.getElementById(
+"productDescription"
+).value = product.description;
+
+uploadedImage = product.image;
+
+const preview =
+document.getElementById(
+"previewImage"
+);
+
+preview.src = uploadedImage;
+
+preview.style.display = "block";
+
+document.getElementById(
+"productModal"
+).style.display = "flex";
+
+}
+
+/* DELETE */
+
+function deleteProduct(index){
+
+if(confirm("Delete this product?")){
+
+products.splice(index,1);
+
+saveStorage();
+
+renderProducts();
+
+}
+
+}
+
+/* ARCHIVE */
+
+function archiveProduct(index){
+
+products[index].status = "Archived";
+
+saveStorage();
+
+renderProducts();
+
+}
+
+/* CLEAR */
+
+function clearForm(){
+
+document.getElementById(
+"productName"
+).value = "";
+
+document.getElementById(
+"productColor"
+).value = "";
+
+document.getElementById(
+"productSize"
+).value = "";
+
+document.getElementById(
+"productPrice"
+).value = "";
+
+document.getElementById(
+"inventoryCount"
+).value = "";
+
+document.getElementById(
+"productDescription"
+).value = "";
+
+uploadedImage = "";
+
+document.getElementById(
+"previewImage"
+).style.display = "none";
+
+}
+
+/* THEME */
+
+function toggleTheme(){
+
+document.body.classList.toggle("dark");
+
+}
+
+/* INIT */
+
+renderProducts();
+
+loadHero();
+
+</script>
+
+</body>
+</html>
